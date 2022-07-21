@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "quizapp": "apps/quizapp",
-    "quizapp-e2e": "apps/quizapp-e2e"
+    "quizapp-e2e": "apps/quizapp-e2e",
+    "shared-ui": "libs/shared/ui"
   }
 }
