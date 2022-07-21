@@ -1,5 +1,3 @@
-console.log(__dirname)
-
 module.exports = {
   plugins: {
     tailwindcss: {
