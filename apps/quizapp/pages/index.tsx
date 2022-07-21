@@ -1,3 +1,5 @@
+import { TopicButton } from '@gsquiz/shared/ui'
+
 // import styles from './index.module.css';
 export function Index() {
   return (
@@ -28,6 +30,7 @@ export function Index() {
           </div>
         </div>
       </div>
+      <TopicButton />
     </div>
   )
 }
