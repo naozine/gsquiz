@@ -4,6 +4,7 @@
   "projects": {
     "quizapp": "apps/quizapp",
     "quizapp-e2e": "apps/quizapp-e2e",
-    "shared-ui": "libs/shared/ui"
+    "shared-ui": "libs/shared/ui",
+    "storybook-e2e-ui-e2e": "apps/storybook-e2e/ui-e2e"
   }
 }
