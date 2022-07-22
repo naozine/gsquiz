@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "functions": "apps/functions",
     "quizapp": "apps/quizapp",
     "quizapp-e2e": "apps/quizapp-e2e",
     "shared-ui": "libs/shared/ui",
