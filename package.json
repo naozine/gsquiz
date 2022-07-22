@@ -5,13 +5,20 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "firebase:serve": "npx concurrently --kill-others \"npx nx build functions --watch\" \"npx firebase emulators:start --only functions\"",
+    "firebase:shell": "npx concurrently --kill-others \"npx nx build functions --watch\" \"npx firebase functions:shell\" --raw"
   },
   "private": true,
+  "main": "dist/apps/functions/main.js",
+  "engines": {
+    "node": "16"
+  },
   "dependencies": {
     "@nrwl/next": "14.4.3",
     "core-js": "^3.6.5",
     "firebase": "^9.9.0",
+    "firebase-functions": "^3.22.0",
     "firebase-tools": "^11.3.0",
     "next": "12.1.6",
     "react": "18.2.0",
@@ -27,6 +34,7 @@
     "@nrwl/eslint-plugin-nx": "14.4.3",
     "@nrwl/jest": "14.4.3",
     "@nrwl/linter": "14.4.3",
+    "@nrwl/node": "14.4.3",
     "@nrwl/react": "14.4.3",
     "@nrwl/storybook": "14.4.3",
     "@nrwl/web": "14.4.3",
@@ -47,6 +55,7 @@
     "autoprefixer": "^10.4.7",
     "babel-jest": "27.5.1",
     "babel-loader": "8.1.0",
+    "concurrently": "^7.3.0",
     "cypress": "^9.1.0",
     "eslint": "~8.15.0",
     "eslint-config-next": "12.1.6",

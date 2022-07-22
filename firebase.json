@@ -3,6 +3,10 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "functions": {
+    "predeploy": ["npx nx lint functions", "npx nx build functions --prod"],
+    "source": "/"
+  },
   "hosting": {
     "public": "dist/apps/quizapp/exported",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
