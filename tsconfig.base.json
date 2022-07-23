@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@gsquiz/shared/gsquiz": ["libs/shared/gsquiz/src/index.ts"],
       "@gsquiz/shared/ui": ["libs/shared/ui/src/index.ts"]
     }
   },

@@ -7,7 +7,8 @@
     "build": "nx build",
     "test": "nx test",
     "firebase:serve": "npx concurrently --kill-others \"npx nx build functions --watch\" \"npx firebase emulators:start --only functions\"",
-    "firebase:shell": "npx concurrently --kill-others \"npx nx build functions --watch\" \"npx firebase functions:shell\" --raw"
+    "firebase:shell": "npx concurrently --kill-others  \"npx firebase functions:shell\"  --raw",
+    "firebase:watch": "npx concurrently --kill-others \"npx nx build functions --watch\" "
   },
   "private": true,
   "main": "dist/apps/functions/main.js",
@@ -20,6 +21,7 @@
     "firebase": "^9.9.0",
     "firebase-functions": "^3.22.0",
     "firebase-tools": "^11.3.0",
+    "googleapis": "^105.0.0",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
