@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "firebase:serve": "npx concurrently --kill-others \"npx nx build functions --watch\" \"npx firebase emulators:start --only functions\"",
+    "firebase:serve": "npx concurrently --kill-others \"npx firebase emulators:start --only functions\"",
     "firebase:shell": "npx concurrently --kill-others  \"npx firebase functions:shell\"  --raw",
     "firebase:watch": "npx concurrently --kill-others \"npx nx build functions --watch\" "
   },

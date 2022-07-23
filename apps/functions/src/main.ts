@@ -16,3 +16,14 @@ export const helloWorld = functions.https.onRequest(
     response.send('Hello from Firebase!!!!!!!')
   }
 )
+
+export const getQuizDatas = functions
+  .region('asia-northeast1')
+  .https.onCall(async ({ arg }: { arg: any }, context) => {
+    // TODO 権限チェック
+    // console.log(context)
+
+    const datas = await getQuizDatasFromSheet()
+
+    return datas
+  })
