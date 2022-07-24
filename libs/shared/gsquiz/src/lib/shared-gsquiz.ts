@@ -6,12 +6,20 @@ export function sharedGsquiz(): string {
 }
 
 const ssauth = async () => {
-  const auth = await google.auth.getClient({
-    keyFile: process.env['GOOGLE_SHEETS_API_CREDENTIALS'],
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  })
+  const keyFile = process.env['GOOGLE_SHEETS_API_CREDENTIALS']
 
-  return auth
+  if (keyFile) {
+    const auth = await google.auth.getClient({
+      keyFile,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    })
+    return auth
+  } else {
+    const auth = await google.auth.getClient({
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    })
+    return auth
+  }
 }
 
 export const getSheetValue = async (spreadsheetId: string, range: string) => {
@@ -26,7 +34,9 @@ export const getSheetValue = async (spreadsheetId: string, range: string) => {
 }
 
 export const getQuizDatasFromSheet = async () => {
-  const sid = process.env['QUIZ_DATA_SHEET_ID'] as string
+  // const sid = process.env['QUIZ_DATA_SHEET_ID'] as string
+  // TODO 正式には、firestoreの設定用ドキュメントなどから取得
+  const sid = '1-KEs8GFaZGXNe7WiExFET2Xe91xFK8ORF_Xg_MnpPKo'
   const values = await getSheetValue(sid, 'クイズデータ!A3:X')
 
   const start_field = 1
