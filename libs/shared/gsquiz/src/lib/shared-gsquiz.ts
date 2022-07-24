@@ -29,35 +29,38 @@ export const getQuizDatasFromSheet = async () => {
   const sid = process.env['QUIZ_DATA_SHEET_ID'] as string
   const values = await getSheetValue(sid, 'クイズデータ!A3:X')
 
+  const start_field = 1
+
   const datas = values.map((f) => {
     const qd: QuizData = {
+      id: f[start_field - 1],
       question: {
-        text: f[0],
+        text: f[start_field],
       },
       choices: [
         {
-          text: f[2],
-          correct: f[3] === 'TRUE',
+          text: f[start_field + 2],
+          correct: f[start_field + 3] === 'TRUE',
         },
         {
-          text: f[5],
-          correct: f[6] === 'TRUE',
+          text: f[start_field + 5],
+          correct: f[start_field + 6] === 'TRUE',
         },
         {
-          text: f[8],
-          correct: f[9] === 'TRUE',
+          text: f[start_field + 8],
+          correct: f[start_field + 9] === 'TRUE',
         },
         {
-          text: f[11],
-          correct: f[12] === 'TRUE',
+          text: f[start_field + 11],
+          correct: f[start_field + 12] === 'TRUE',
         },
         {
-          text: f[14],
-          correct: f[15] === 'TRUE',
+          text: f[start_field + 14],
+          correct: f[start_field + 15] === 'TRUE',
         },
       ],
       answer: {
-        text: f[17],
+        text: f[start_field + 17],
       },
     }
     return qd
