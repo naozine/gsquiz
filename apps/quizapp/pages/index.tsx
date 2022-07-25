@@ -1,36 +1,79 @@
-import { TopicButton } from '@gsquiz/shared/ui'
+import { getFbAuth, useOnAuthChange } from '@gsquiz/shared/fbclient'
+import {
+  sendSignInLinkToEmail,
+  signInAnonymously,
+  signInWithEmailLink,
+  signOut,
+  User,
+} from 'firebase/auth'
+import { useRef, useState } from 'react'
 
 // import styles from './index.module.css';
 export function Index() {
-  return (
-    <div className="bg-gray-50">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Ready to dive in?</span>
-          <span className="block text-indigo-600">
-            Start your free trial today.
-          </span>
-        </h2>
-        <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-          <div className="inline-flex rounded-md shadow">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+  const emailRef = useRef<HTMLInputElement>()
+  const passwordRef = useRef<HTMLInputElement>()
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const auth = getFbAuth()
+  const user = useOnAuthChange()
+  // const user = useAnonymousSignIn()
+
+  const LoginState = ({ user }: { user: User | undefined | null }) => {
+    if (user === undefined) {
+      return <div>loading...</div>
+    } else if (user === null) {
+      return (
+        <div>
+          <button
+            onClick={async () => {
+              await signInAnonymously(getFbAuth())
+            }}
+          >
+            signInAnonymously
+          </button>
+          <hr></hr>
+          <div>
+            <div>
+              <input placeholder="email" ref={emailRef} />
+            </div>
+            <div>
+              <input placeholder="password" ref={passwordRef} />
+            </div>
+
+            <button
+              onClick={() => {
+                //
+                console.log({
+                  email: emailRef.current.value,
+                  password: passwordRef.current.value,
+                })
+              }}
             >
-              Get started
-            </a>
-          </div>
-          <div className="ml-3 inline-flex rounded-md shadow">
-            <a
-              href="#"
-              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
-            >
-              Learn more
-            </a>
+              sign in with maillink
+            </button>
           </div>
         </div>
-      </div>
-      <TopicButton />
+      )
+    } else {
+      return (
+        <div>
+          <div>{`uid: ${user.uid}`}</div>
+          <button
+            onClick={async () => {
+              await signOut(getFbAuth())
+            }}
+          >
+            logout
+          </button>
+        </div>
+      )
+    }
+  }
+
+  return (
+    <div className="bg-gray-50">
+      <LoginState user={user} />
     </div>
   )
 }
