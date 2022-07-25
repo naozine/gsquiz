@@ -3,16 +3,13 @@ import ChoiceView from '../choice-view/choice-view'
 import RubyText from '../ruby-text/ruby-text'
 
 /* eslint-disable-next-line */
-export interface QuizViewProps {
+export interface AnswerViewProps {
   qd: QuizData
-  onClick: (i: number) => void
+  onClick: () => void
 }
 
-export function QuizView({ qd, onClick }: QuizViewProps) {
-  // const text = [['青い空', 'あおいそら']]
-
+export function AnswerView({ qd, onClick }: AnswerViewProps) {
   return (
-    // <div className="flex flex-row transition-opacity  opacity-0 hover:opacity-100 duration-[2000ms] ease-linear animate-pulse">
     <div className="flex flex-row opacity-0 animate-fadein">
       <div className="grow" />
       <div className="min-w-[600px]">
@@ -33,15 +30,33 @@ export function QuizView({ qd, onClick }: QuizViewProps) {
           />
 
           <div>
-            <RubyText text={qd.question.text} words={qd.question.rubyHtml} />
+            <div className="text-red-500 text-3xl">
+              <RubyText text={qd.answer.text} words={qd.answer.rubyHtml} />
+            </div>
+            <div className="text-xl text-blue-500">
+              <RubyText text={qd.answer.text2} words={qd.answer.rubyHtml2} />
+            </div>
           </div>
+
           <div className="grow" />
         </div>
 
         {/* 選択肢 */}
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
           <div className="grow" />
           <ChoiceView qd={qd} onClick={onClick} />
+          <div className="grow" />
+        </div> */}
+
+        {/* 次のページ */}
+        <div className="flex flex-row mt-4">
+          <div className="grow" />
+          <div
+            className="text-2xl hover:bg-indigo-100 rounded-md p-2"
+            onClick={onClick}
+          >
+            次のページへ
+          </div>
           <div className="grow" />
         </div>
       </div>
@@ -50,4 +65,4 @@ export function QuizView({ qd, onClick }: QuizViewProps) {
   )
 }
 
-export default QuizView
+export default AnswerView

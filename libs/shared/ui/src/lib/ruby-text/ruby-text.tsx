@@ -1,11 +1,11 @@
 /* eslint-disable-next-line */
 export interface RubyTextProps {
-  text: string
+  text: string | undefined
   words?: string[][] | undefined
 }
 
 export function RubyText({ text, words }: RubyTextProps) {
-  const ws = words ? words : [[text, '']]
+  const ws = words ? words : [[text ? text : '', '']]
   return (
     <div>
       {ws.map((w) => {

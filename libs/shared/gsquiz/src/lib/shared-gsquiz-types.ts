@@ -23,5 +23,15 @@ export interface QuizData {
     text: string
     image?: string
     rubyHtml?: string[][]
+    text2?: string
+    rubyHtml2?: string[][]
   }
+}
+
+export type PageStateType = 'question' | 'answer' | 'start' | 'result'
+export interface PageState {
+  quizNo: number
+  state: PageStateType
+  qd?: QuizData
+  yourAnswerId?: number
 }
