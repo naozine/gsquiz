@@ -11,14 +11,17 @@ export interface QuizData {
   question: {
     text: string
     image?: string
+    rubyHtml?: string[][]
   }
   choices: {
     text: string
     image?: string
     correct: boolean
+    rubyHtml?: string[][]
   }[]
   answer: {
     text: string
     image?: string
+    rubyHtml?: string[][]
   }
 }
