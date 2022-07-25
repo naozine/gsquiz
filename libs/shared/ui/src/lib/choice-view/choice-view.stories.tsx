@@ -1,14 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { QuizView } from './quiz-view'
+import { ChoiceView } from './choice-view'
 
 export default {
-  component: QuizView,
-  title: 'QuizView',
-} as ComponentMeta<typeof QuizView>
+  component: ChoiceView,
+  title: 'ChoiceView',
+} as ComponentMeta<typeof ChoiceView>
 
-const Template: ComponentStory<typeof QuizView> = (args) => (
-  <QuizView {...args} />
+const Template: ComponentStory<typeof ChoiceView> = (args) => (
+  <ChoiceView {...args} />
 )
 
 export const Primary = Template.bind({})

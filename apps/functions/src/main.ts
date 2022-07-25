@@ -1,4 +1,4 @@
-import { getQuizDatasFromSheet, getSheetValue } from '@gsquiz/shared/gsquiz'
+import { getQuizDatasFromSheet } from '@gsquiz/shared/gsquiz'
 import * as functions from 'firebase-functions'
 
 // // Start writing Firebase Functions

@@ -8,6 +8,37 @@ import {
 } from 'firebase/auth'
 import { useRef, useState } from 'react'
 
+const rubyHtmlToSpanArray = (html: string) => {
+  try {
+    const parser = new DOMParser()
+    const root = parser.parseFromString(html, 'text/html')
+
+    const nodes = root.childNodes
+
+    const results: string[][] = []
+
+    const nls = (s: string | null) => (s ? s : '')
+
+    nodes.forEach((n) => {
+      const nodes2 = n.childNodes
+      console.log(nodes2)
+      if (nodes2.length > 0) {
+        results.push([
+          nls(nodes2.item(0).textContent),
+          nls(nodes2.item(1).textContent),
+        ])
+      } else {
+        results.push([nls(n.textContent), ''])
+      }
+    })
+
+    return results
+  } catch (e) {
+    console.log(e)
+  }
+  return [['', '']]
+}
+
 // import styles from './index.module.css';
 export function Index() {
   const emailRef = useRef<HTMLInputElement>()
@@ -18,6 +49,10 @@ export function Index() {
   const auth = getFbAuth()
   const user = useOnAuthChange()
   // const user = useAnonymousSignIn()
+
+  const text = rubyHtmlToSpanArray(
+    'また<ruby>挑戦<rt>ちょうせん</rt></ruby>してね！\n5<ruby>問<rt>もん</rt></ruby><ruby>中<rt>ちゅう</rt></ruby>1<ruby>問<rt>もん</rt></ruby><ruby>正解<rt>せいかい</rt></ruby>で20<ruby>点<rt>てん</rt></ruby>だよ\nぼくの<ruby>部屋<rt>へや</rt></ruby>へまたあそびに<ruby>来<rt>き</rt></ruby>てね。'
+  )
 
   const LoginState = ({ user }: { user: User | undefined | null }) => {
     if (user === undefined) {
