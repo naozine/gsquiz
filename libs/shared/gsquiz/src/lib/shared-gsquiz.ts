@@ -1,6 +1,7 @@
 import { google } from 'googleapis'
 import { QuizData } from './shared-gsquiz-types'
 import { parse } from 'node-html-parser'
+import { getFirestore } from 'firebase-admin/firestore'
 
 export function sharedGsquiz(): string {
   return 'shared-gsquiz'
@@ -78,6 +79,46 @@ export const getQuizDatasFromSheet = async () => {
   })
 
   return datas
+}
+
+export const getQuizDatasFromSheetOld = async () => {
+  const sid = '1lp9v6tLjMtgl83DN7AWyIx6q6WtLtim6Oxd6LTjKcio'
+  const values = await getSheetValue(sid, 'クイズDB!A12:L100')
+
+  const results: QuizData[] = []
+  let lastQrecord: string[] = []
+  for (const flds of values) {
+    const type = flds[1]
+    if (type === '問題') {
+      lastQrecord = flds
+    } else if (type === '解答') {
+      console.log(lastQrecord[8])
+      const qd: QuizData = {
+        id: lastQrecord[0],
+        question: {
+          text: lastQrecord[5],
+        },
+        choices: lastQrecord[6].split('\n').map((ctext, i) => {
+          return {
+            text: ctext,
+            correct: lastQrecord[8]
+              ? // ? lastQrecord[8].indexOf('' + (i + 1)) > 0
+                lastQrecord[8] === String(i + 1)
+              : false,
+          }
+        }),
+        answer: {
+          text: flds[4],
+          text2: flds[5],
+        },
+      }
+      results.push(qd)
+      lastQrecord = []
+    }
+  }
+
+  // console.log(JSON.stringify(results, null, '\t'))
+  return results
 }
 
 export const textToRubyHtml = (text: string) => {
@@ -412,4 +453,22 @@ export const rubyHtmlToSpanArray = (html: string) => {
     }
     return [n.text, '']
   })
+}
+
+export const setFirestoreFromSheetOld = async () => {
+  const datas = await getQuizDatasFromSheetOld()
+
+  const db = getFirestore()
+
+  // const bat = db.batch()
+
+  for (const qd of datas) {
+    const docref = db.doc(`QuizDatas/${qd.id}`)
+    const ret = await docref.set(qd)
+    // bat.set(docref, qd)
+    console.log(`id=${qd.id} done.`)
+  }
+
+  // const result = await bat.commit()
+  console.log('all done ')
 }

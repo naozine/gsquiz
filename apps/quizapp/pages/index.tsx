@@ -1,4 +1,8 @@
-import { getFbAuth, useOnAuthChange } from '@gsquiz/shared/fbclient'
+import {
+  getFbAuth,
+  getFbFunctions,
+  useOnAuthChange,
+} from '@gsquiz/shared/fbclient'
 import {
   sendSignInLinkToEmail,
   signInAnonymously,
@@ -6,6 +10,7 @@ import {
   signOut,
   User,
 } from 'firebase/auth'
+import { httpsCallable } from 'firebase/functions'
 import { useRef, useState } from 'react'
 
 const rubyHtmlToSpanArray = (html: string) => {
@@ -43,16 +48,8 @@ const rubyHtmlToSpanArray = (html: string) => {
 export function Index() {
   const emailRef = useRef<HTMLInputElement>()
   const passwordRef = useRef<HTMLInputElement>()
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
 
-  const auth = getFbAuth()
   const user = useOnAuthChange()
-  // const user = useAnonymousSignIn()
-
-  const text = rubyHtmlToSpanArray(
-    'また<ruby>挑戦<rt>ちょうせん</rt></ruby>してね！\n5<ruby>問<rt>もん</rt></ruby><ruby>中<rt>ちゅう</rt></ruby>1<ruby>問<rt>もん</rt></ruby><ruby>正解<rt>せいかい</rt></ruby>で20<ruby>点<rt>てん</rt></ruby>だよ\nぼくの<ruby>部屋<rt>へや</rt></ruby>へまたあそびに<ruby>来<rt>き</rt></ruby>てね。'
-  )
 
   const LoginState = ({ user }: { user: User | undefined | null }) => {
     if (user === undefined) {
@@ -109,6 +106,14 @@ export function Index() {
   return (
     <div className="bg-gray-50">
       <LoginState user={user} />
+      <button
+        onClick={async () => {
+          const startQuiz = httpsCallable(getFbFunctions(), 'startQuiz')
+          await startQuiz('xxx')
+        }}
+      >
+        start
+      </button>
     </div>
   )
 }

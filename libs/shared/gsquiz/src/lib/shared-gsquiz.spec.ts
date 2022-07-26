@@ -1,5 +1,11 @@
+import * as dotenv from 'dotenv'
+dotenv.config({ path: '.env' })
+
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
 import {
+  getQuizDatasFromSheetOld,
   rubyHtmlToSpanArray,
+  setFirestoreFromSheetOld,
   sharedGsquiz,
   textToRubyHtml,
 } from './shared-gsquiz'
@@ -39,4 +45,16 @@ describe('sharedGsquiz', () => {
     expect(array[2][0]).toEqual('空')
     expect(array[2][1]).toEqual('そら')
   })
+
+  it('クイズDBロード from old excel', async () => {
+    //
+    const values = await getQuizDatasFromSheetOld()
+  })
+
+  it('OLDフォーマットのクイズDBをFirestoreに書き込み', async () => {
+    initializeApp({
+      credential: applicationDefault(),
+    })
+    await setFirestoreFromSheetOld()
+  }, 50000)
 })
