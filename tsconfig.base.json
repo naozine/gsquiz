@@ -17,6 +17,8 @@
     "paths": {
       "@gsquiz/shared/fbclient": ["libs/shared/fbclient/src/index.ts"],
       "@gsquiz/shared/gsquiz": ["libs/shared/gsquiz/src/index.ts"],
+      "@gsquiz/shared/gsquiz-types": ["libs/shared/gsquiz-types/src/index.ts"],
+      "@gsquiz/shared/quizclient": ["libs/shared/quizclient/src/index.ts"],
       "@gsquiz/shared/ui": ["libs/shared/ui/src/index.ts"]
     }
   },

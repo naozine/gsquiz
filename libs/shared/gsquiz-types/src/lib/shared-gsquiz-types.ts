@@ -35,3 +35,11 @@ export interface PageState {
   qd?: QuizData
   yourAnswerId?: number
 }
+export const DefaultPageState: PageState = {
+  quizNo: 0,
+  state: 'start',
+}
+
+export function sharedGsquizTypes(): string {
+  return 'shared-gsquiz-types'
+}

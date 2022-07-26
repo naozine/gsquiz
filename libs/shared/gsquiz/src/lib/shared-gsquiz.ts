@@ -1,7 +1,8 @@
 import { google } from 'googleapis'
-import { QuizData } from './shared-gsquiz-types'
 import { parse } from 'node-html-parser'
 import { getFirestore } from 'firebase-admin/firestore'
+import * as fs from 'fs'
+import { QuizData } from '@gsquiz/shared/gsquiz-types'
 
 export function sharedGsquiz(): string {
   return 'shared-gsquiz'
@@ -471,4 +472,18 @@ export const setFirestoreFromSheetOld = async () => {
 
   // const result = await bat.commit()
   console.log('all done ')
+}
+
+export const createJsonDbFromSheetOld = async () => {
+  const datas = await getQuizDatasFromSheetOld()
+
+  fs.writeFileSync(
+    'libs/shared/gsquiz/src/lib/quizdb.json',
+    JSON.stringify(datas, null, '\t')
+  )
+}
+
+export const getQuizDB = () => {
+  // const qds = quizdb as QuizData[]
+  // console.log(qds[0])
 }

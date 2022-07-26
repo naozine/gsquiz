@@ -1,3 +1,7 @@
 export * from './lib/shared-ui'
 export * from './lib/topic-button/topic-button'
 export * from './lib/quiz-data-image-uploader/quiz-data-image-uploader'
+export * from './lib/quiz-answer-view/quiz-answer-view'
+export * from './lib/quiz-view/quiz-view'
+export * from './lib/answer-view/answer-view'
+export * from './lib/choice-view/choice-view'

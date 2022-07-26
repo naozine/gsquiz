@@ -1,4 +1,5 @@
-import { QuizData } from '@gsquiz/shared/gsquiz'
+// import { QuizData } from '@gsquiz/shared/gsquiz'
+import { QuizData } from '@gsquiz/shared/gsquiz-types'
 import ChoiceView from '../choice-view/choice-view'
 import RubyText from '../ruby-text/ruby-text'
 
