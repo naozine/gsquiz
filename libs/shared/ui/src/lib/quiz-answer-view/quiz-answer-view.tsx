@@ -37,7 +37,7 @@ export function QuizAnswerView({ state }: QuizAnswerViewProps) {
       return <div>TODO</div>
     }
   }
-  return <div className={twFadeOut}>{ViewImpl(state)}</div>
+  return <div>{ViewImpl(state)}</div>
 }
 
 export default QuizAnswerView

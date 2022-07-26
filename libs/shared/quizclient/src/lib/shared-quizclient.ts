@@ -11,6 +11,9 @@ export function sharedQuizclient(): string {
   return 'shared-quizclient'
 }
 
+export const wait = async (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))
+
 const SWRKEY_PageState = 'SWRKEY_PageState'
 const SWRKEY_PageStateHist = 'SWRKEY_PageStateHist'
 
