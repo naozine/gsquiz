@@ -16,7 +16,7 @@ export function AnswerView({ qd, onClick }: AnswerViewProps) {
   const [fadeout, setFadeout] = useState<boolean>(false)
   return (
     <FadeInOut fadeout={fadeout}>
-      <div className="min-w-[600px]">
+      <div>
         {/* ヘッダ */}
         <div className="flex flex-row  border-b-2 mb-2 pb-2">
           <div className="grow" />

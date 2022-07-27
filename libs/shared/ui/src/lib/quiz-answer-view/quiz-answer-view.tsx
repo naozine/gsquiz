@@ -9,23 +9,19 @@ import QuizView from '../quiz-view/quiz-view'
 /* eslint-disable-next-line */
 export interface QuizAnswerViewProps {
   state: PageState
+  onNext: () => void
 }
 
-export function QuizAnswerView({ state }: QuizAnswerViewProps) {
+export function QuizAnswerView({ state, onNext }: QuizAnswerViewProps) {
   const { mutate } = useSWRConfig()
-  const [_twFadeOut, setTwFadeOut] = useState<string>('')
 
   const clickChoice = (choiceId: number) => {
-    setTwFadeOut('animate-fadeout')
     answerQuiz(choiceId, state, mutate)
   }
 
   const clickNext = () => {
-    setTwFadeOut('animate-fadeout')
-    nextPage(state, mutate)
+    onNext()
   }
-
-  const twFadeOut = _twFadeOut ? _twFadeOut : ''
 
   const ViewImpl = (ps: PageState) => {
     if (ps.state === 'question' && ps.qd) {

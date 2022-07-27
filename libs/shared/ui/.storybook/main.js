@@ -22,4 +22,5 @@ module.exports = {
     return config
   },
   typescript: { reactDocgen: false },
+  staticDirs: ['/home/ubuntu/gsquiz/apps/quizapp/public'],
 }

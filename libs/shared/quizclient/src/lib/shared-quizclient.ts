@@ -34,6 +34,10 @@ export const usePageStateHist = () => {
   return hist
 }
 
+export const updatePageState = (nextPs: PageState, mutate: ScopedMutator) => {
+  mutate<PageState>(SWRKEY_PageState, { ...nextPs })
+}
+
 export const startQuiz = (ps: PageState, mutate: ScopedMutator) => {
   // const { mutate } = useSWRConfig()
   if (ps.state === 'start') {
@@ -81,6 +85,11 @@ const ANSWER_NUM = 5
  */
 export const nextPage = (ps: PageState, mutate: ScopedMutator) => {
   if (ps.state === 'answer') {
+    const newState: PageState = {
+      quizNo: 0,
+      state: 'result',
+    }
+    mutate<PageState>(SWRKEY_PageState, newState)
     /*
     const hist = usePageStateHist()
     if (hist.length < ANSWER_NUM) {
@@ -98,6 +107,9 @@ export const nextPage = (ps: PageState, mutate: ScopedMutator) => {
 }
 
 export const getQuizDb = () => {
-  //
-  return quizdb as QuizData[]
+  const results: QuizData[] = []
+  for (let i = 0; i < quizdb.length; ++i) {
+    results.push(quizdb[i])
+  }
+  return results
 }

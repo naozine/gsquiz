@@ -11,7 +11,7 @@ export function FadeInOut({ children, fadeout = false }: FadeInOutProps) {
   return (
     <div className={`flex flex-row ${attr}`}>
       <div className="grow" />
-      {children}
+      <div className="min-w-[300px] max-w-[600px]">{children}</div>
       <div className="grow" />
     </div>
   )

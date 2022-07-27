@@ -16,9 +16,8 @@ export function QuizView({ qd, onClick }: QuizViewProps) {
   const [fadeout, setFadeout] = useState<boolean>(false)
 
   return (
-    // <div className="flex flex-row transition-opacity  opacity-0 hover:opacity-100 duration-[2000ms] ease-linear animate-pulse">
     <FadeInOut fadeout={fadeout}>
-      <div className="min-w-[600px]">
+      <div>
         {/* ヘッダ */}
         <div className="flex flex-row  border-b-2 mb-2 pb-2">
           <div className="grow" />
@@ -38,6 +37,20 @@ export function QuizView({ qd, onClick }: QuizViewProps) {
           <div>
             <RubyText text={qd.question.text} words={qd.question.rubyHtml} />
           </div>
+          <div className="grow" />
+        </div>
+
+        {/* 問題文画像 */}
+        <div className="flex flex-row">
+          <div className="grow" />
+          <div className="relative after:absolute after:top-0 after:left-0 after:shadow-inner">
+            <img
+              className="object-cover rounded-xl m-1 h-48"
+              alt="xxx"
+              src={`images/${qd.id}/a001.jpg`}
+            />
+          </div>
+
           <div className="grow" />
         </div>
 

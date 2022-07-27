@@ -17,7 +17,7 @@ Primary.args = {
     quizNo: 1,
     state: 'question',
     qd: {
-      id: '1',
+      id: '13',
       question: {
         text: 'なぞなぞだよ。つぎのうち、鳥のお友達がいないのは何番かな？',
         rubyHtml: [

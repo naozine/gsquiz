@@ -9,6 +9,7 @@
     "shared-gsquiz": "libs/shared/gsquiz",
     "shared-gsquiz-types": "libs/shared/gsquiz-types",
     "shared-quizclient": "libs/shared/quizclient",
+    "shared-quizserver": "libs/shared/quizserver",
     "shared-ui": "libs/shared/ui",
     "storybook-e2e-ui-e2e": "apps/storybook-e2e/ui-e2e"
   }

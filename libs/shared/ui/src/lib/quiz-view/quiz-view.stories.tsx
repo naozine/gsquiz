@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof QuizView> = (args) => (
 export const Primary = Template.bind({})
 Primary.args = {
   qd: {
-    id: '1',
+    id: '13',
     question: {
       text: 'なぞなぞだよ。つぎのうち、鳥のお友達がいないのは何番かな？',
       rubyHtml: [
