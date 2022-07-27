@@ -1,5 +1,6 @@
 import { uploadImage } from '@gsquiz/shared/fbclient'
-import { QuizData, QuizDataFieldType } from '@gsquiz/shared/gsquiz'
+import { QuizData, QuizDataFieldType } from '@gsquiz/shared/gsquiz-types'
+// import { QuizData, QuizDataFieldType } from '@gsquiz/shared/gsquiz'
 import styles from './quiz-data-image-uploader.module.css'
 
 /* eslint-disable-next-line */

@@ -1,5 +1,13 @@
+import * as dotenv from 'dotenv'
+dotenv.config({ path: '.env' })
+
+import { applicationDefault, initializeApp } from 'firebase-admin/app'
 import {
+  createJsonDbFromSheetOld,
+  getQuizDatasFromSheetOld,
+  getQuizDB,
   rubyHtmlToSpanArray,
+  setFirestoreFromSheetOld,
   sharedGsquiz,
   textToRubyHtml,
 } from './shared-gsquiz'
@@ -38,5 +46,30 @@ describe('sharedGsquiz', () => {
     expect(array[1][1]).toEqual('')
     expect(array[2][0]).toEqual('空')
     expect(array[2][1]).toEqual('そら')
+  })
+
+  it('クイズDBロード from old excel', async () => {
+    //
+    const values = await getQuizDatasFromSheetOld()
+  })
+
+  it('OLDフォーマットのクイズDBをFirestoreに書き込み', async () => {
+    initializeApp({
+      credential: applicationDefault(),
+    })
+    await setFirestoreFromSheetOld()
+
+    // jestだと、最初のfirestoreへの書き込みのawaitでブロックする
+    // functionsから呼び出した時はブロックしない。
+    // jsのライブラリとnodeのライブラリの違い？
+  }, 50000)
+
+  it('OLDフォーマットのクイズDBをJSONファイルに変換', async () => {
+    //
+    await createJsonDbFromSheetOld()
+  })
+
+  it('JSONのクイズDB参照', () => {
+    getQuizDB()
   })
 })

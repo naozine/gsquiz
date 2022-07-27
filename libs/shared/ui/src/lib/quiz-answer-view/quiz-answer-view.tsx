@@ -1,25 +1,27 @@
-import { PageState, PageStateType, QuizData } from '@gsquiz/shared/gsquiz'
+// import { PageState, PageStateType, QuizData } from '@gsquiz/shared/gsquiz'
+import { PageState } from '@gsquiz/shared/gsquiz-types'
+import { answerQuiz, nextPage } from '@gsquiz/shared/quizclient'
 import { useState } from 'react'
+import { useSWRConfig } from 'swr'
 import AnswerView from '../answer-view/answer-view'
 import QuizView from '../quiz-view/quiz-view'
 
 /* eslint-disable-next-line */
 export interface QuizAnswerViewProps {
   state: PageState
+  onNext: () => void
 }
 
-export function QuizAnswerView({ state }: QuizAnswerViewProps) {
-  const [_twFadeOut, setTwFadeOut] = useState<string>('')
+export function QuizAnswerView({ state, onNext }: QuizAnswerViewProps) {
+  const { mutate } = useSWRConfig()
 
   const clickChoice = (choiceId: number) => {
-    setTwFadeOut('animate-fadeout')
+    answerQuiz(choiceId, state, mutate)
   }
 
   const clickNext = () => {
-    setTwFadeOut('animate-fadeout')
+    onNext()
   }
-
-  const twFadeOut = _twFadeOut ? _twFadeOut : ''
 
   const ViewImpl = (ps: PageState) => {
     if (ps.state === 'question' && ps.qd) {
@@ -31,7 +33,7 @@ export function QuizAnswerView({ state }: QuizAnswerViewProps) {
       return <div>TODO</div>
     }
   }
-  return <div className={twFadeOut}>{ViewImpl(state)}</div>
+  return <div>{ViewImpl(state)}</div>
 }
 
 export default QuizAnswerView

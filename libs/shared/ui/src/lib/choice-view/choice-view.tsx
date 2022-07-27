@@ -1,4 +1,5 @@
-import { QuizData } from '@gsquiz/shared/gsquiz'
+// import { QuizData } from '@gsquiz/shared/gsquiz'
+import { QuizData } from '@gsquiz/shared/gsquiz-types'
 import RubyText from '../ruby-text/ruby-text'
 
 /* eslint-disable-next-line */
@@ -14,6 +15,7 @@ export function ChoiceView({ qd, onClick }: ChoiceViewProps) {
       {qd.choices.map((choice, i) => {
         return (
           <div
+            key={`choice_${i}`}
             className="flex flex-row"
             onClick={() => {
               if (onClick) {

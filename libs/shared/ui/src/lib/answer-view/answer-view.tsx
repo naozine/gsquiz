@@ -1,5 +1,9 @@
-import { QuizData } from '@gsquiz/shared/gsquiz'
-import ChoiceView from '../choice-view/choice-view'
+// import { QuizData } from '@gsquiz/shared/gsquiz'
+// import ChoiceView from '../choice-view/choice-view'
+import { QuizData } from '@gsquiz/shared/gsquiz-types'
+import { wait } from '@gsquiz/shared/quizclient'
+import { useState } from 'react'
+import FadeInOut from '../fade-in-out/fade-in-out'
 import RubyText from '../ruby-text/ruby-text'
 
 /* eslint-disable-next-line */
@@ -9,10 +13,10 @@ export interface AnswerViewProps {
 }
 
 export function AnswerView({ qd, onClick }: AnswerViewProps) {
+  const [fadeout, setFadeout] = useState<boolean>(false)
   return (
-    <div className="flex flex-row opacity-0 animate-fadein">
-      <div className="grow" />
-      <div className="min-w-[600px]">
+    <FadeInOut fadeout={fadeout}>
+      <div>
         {/* ヘッダ */}
         <div className="flex flex-row  border-b-2 mb-2 pb-2">
           <div className="grow" />
@@ -53,15 +57,18 @@ export function AnswerView({ qd, onClick }: AnswerViewProps) {
           <div className="grow" />
           <div
             className="text-2xl hover:bg-indigo-100 rounded-md p-2"
-            onClick={onClick}
+            onClick={async () => {
+              setFadeout(true)
+              await wait(2000)
+              onClick()
+            }}
           >
             次のページへ
           </div>
           <div className="grow" />
         </div>
       </div>
-      <div className="grow" />
-    </div>
+    </FadeInOut>
   )
 }
 

@@ -1,5 +1,9 @@
-import { QuizData } from '@gsquiz/shared/gsquiz'
+// import { QuizData } from '@gsquiz/shared/gsquiz'
+import { QuizData } from '@gsquiz/shared/gsquiz-types'
+import { wait } from '@gsquiz/shared/quizclient'
+import { useState } from 'react'
 import ChoiceView from '../choice-view/choice-view'
+import FadeInOut from '../fade-in-out/fade-in-out'
 import RubyText from '../ruby-text/ruby-text'
 
 /* eslint-disable-next-line */
@@ -9,13 +13,11 @@ export interface QuizViewProps {
 }
 
 export function QuizView({ qd, onClick }: QuizViewProps) {
-  // const text = [['青い空', 'あおいそら']]
+  const [fadeout, setFadeout] = useState<boolean>(false)
 
   return (
-    // <div className="flex flex-row transition-opacity  opacity-0 hover:opacity-100 duration-[2000ms] ease-linear animate-pulse">
-    <div className="flex flex-row opacity-0 animate-fadein">
-      <div className="grow" />
-      <div className="min-w-[600px]">
+    <FadeInOut fadeout={fadeout}>
+      <div>
         {/* ヘッダ */}
         <div className="flex flex-row  border-b-2 mb-2 pb-2">
           <div className="grow" />
@@ -38,15 +40,35 @@ export function QuizView({ qd, onClick }: QuizViewProps) {
           <div className="grow" />
         </div>
 
+        {/* 問題文画像 */}
+        <div className="flex flex-row">
+          <div className="grow" />
+          <div className="relative after:absolute after:top-0 after:left-0 after:shadow-inner">
+            <img
+              className="object-cover rounded-xl m-1 h-48"
+              alt="xxx"
+              src={`images/${qd.id}/a001.jpg`}
+            />
+          </div>
+
+          <div className="grow" />
+        </div>
+
         {/* 選択肢 */}
         <div className="flex flex-row">
           <div className="grow" />
-          <ChoiceView qd={qd} onClick={onClick} />
+          <ChoiceView
+            qd={qd}
+            onClick={async (i) => {
+              setFadeout(true)
+              await wait(2000)
+              onClick(i)
+            }}
+          />
           <div className="grow" />
         </div>
       </div>
-      <div className="grow" />
-    </div>
+    </FadeInOut>
   )
 }
 
